@@ -25,12 +25,22 @@ jQuery.noConflict();
 </script>
 <script type="text/javascript">
     jQuery(window).load(function($){
-        jQuery(".button").click(function(){
+        jQuery(".addCat").click(function(){
             jQuery.ajax({
                 type: "post",
                 url: "<?php echo $ququkAdmin; ?>ajax.php",
-                //url: "http://localhost/ququk/wp-admin/admin.php?page=ququk/admin/ququk.php",
-                data:jQuery("#form").serialize(),
+                data:jQuery("#formCat").serialize(),
+                success: function(data){
+                    jQuery(".success").html(data);
+                }
+            });
+        });
+        jQuery(".addQuq").click(function(){
+            serialize = jQuery("#formQuq").serialize();
+            jQuery.ajax({
+                type: "post",
+                url: "<?php echo $ququkAdmin; ?>ajax.php",
+                data:serialize,
                 success: function(data){
                     jQuery(".success").html(data);
                 }

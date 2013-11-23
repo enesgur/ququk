@@ -24,9 +24,9 @@ class ququkDb {
 
     public function insertQuq($body,$id){
         $wpdb = $this->wpdb;
-        $body = htmlspecialchars($body);
+        //$body = htmlspecialchars($body);
         try{
-            $result = array("INSERT INTO ququkContent (Body, CatId) VALUES (%s, %d)",array($body,$id));
+            $result = array("INSERT INTO ququkContent (Body, CatId) VALUES (%s, %s)",array($body,$id));
             $wpdb->query($wpdb->prepare($result[0],$result[1]));
         }catch (PDOException $e){
             echo $e->getMessage();
@@ -34,5 +34,10 @@ class ququkDb {
         }
     }
 
+    public static function allCat(){
+        global $wpdb;
+        $result = $wpdb->get_results('SELECT Id, Slug FROM ququkCategory',OBJECT_K);
+        return $result;
+    }
    // public function selectQuq($start,$limit,)
 }

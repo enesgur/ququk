@@ -1,5 +1,6 @@
 <?php 
 if($_POST){
+	print_r($_POST);
 	/*
 	 *İnclude wp-blog-header.php
 	*/
@@ -31,6 +32,22 @@ if($_POST){
 		}else{
 			echo '<div data-alert class="alert-box alert">';
 			echo 'failed add <b>ququkCategory</b>';
+			echo '<a href="#" class="close">&times;</a>';
+			echo '</div>';
+		}
+	}elseif ($_POST['type'] === "ququkQuq") {
+		$body	= $_POST['body'];
+		$cat 	= $_POST['cat'];
+		if(!$body == '' && !$cat == ''){ //null variables not insert db.
+			if($ququkDb->insertQuq($body,$cat)){
+				echo '<div data-alert class="alert-box success">';
+				echo 'success add <b>Quq</b>';
+				echo '<a href="#" class="close">&times;</a>';
+				echo '</div>';
+			}
+		}else{
+			echo '<div data-alert class="alert-box alert">';
+			echo 'failed add <b>Quq</b>';
 			echo '<a href="#" class="close">&times;</a>';
 			echo '</div>';
 		}
