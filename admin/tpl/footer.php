@@ -18,11 +18,27 @@
     </div>
 </footer>
 <script>
+jQuery.noConflict();
     document.write('<script src=' +
         ('__proto__' in {} ? '<?php echo $ququkThemes; ?>js/vendor/zepto' : 'js/vendor/jquery') +
         '.js><\/script>')
 </script>
-<script src="js/foundation.min.js"></script>
+<script type="text/javascript">
+    jQuery(window).load(function($){
+        jQuery(".button").click(function(){
+            jQuery.ajax({
+                type: "post",
+                url: "<?php echo $ququkAdmin; ?>ajax.php",
+                //url: "http://localhost/ququk/wp-admin/admin.php?page=ququk/admin/ququk.php",
+                data:jQuery("#form").serialize(),
+                success: function(data){
+                    jQuery(".success").html(data);
+                }
+            });
+        });
+    });
+</script>
+<script src="<?php echo $ququkThemes; ?>js/foundation.min.js"></script>
 <!--
 
 <script src="js/foundation/foundation.js"></script>
@@ -60,5 +76,5 @@
 -->
 
 <script>
-    $(document).foundation();
+   jQuery(document).foundation();
 </script>

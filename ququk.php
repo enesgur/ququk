@@ -14,6 +14,7 @@ Author URI: http://enesgur.com.tr/
 $homeQuquk      = ABSPATH;
 $ququkPlugin    = ABSPATH."wp-content/plugins/ququk/";
 $ququkThemes    =  plugins_url()."/ququk/admin/tpl/";
+$ququkAdmin     = plugins_url()."/ququk/admin/";
 //İnclude Class System
 include("inc.php");
 include("db.php");

@@ -1,27 +1,31 @@
 <?php include($ququkPlugin."admin/tpl/header.php"); //Imclude Header File (Style and Javascript Include) ?>
-<sript type="text/javascript">
+<?php
 
-</sript>
+?>
+
     <!-- Contact Details -->
 
-<form action="" method="post">
+<form id="form" action="" method="post">
     <fieldset>
         <legend name="cat"><a name="cat"/>Add QuQuk Category</a></legend>
         <div class="row">
             <div class="large-5 columns">
                 <label>Slug</label>
-                <input type="text" placeholder="Slug">
+                <input type="text" name="slug" placeholder="Slug">
             </div>
             <div class="large-5 pull-2 columns">
                 <label>Title</label>
-                <input type="text" placeholder="Title">
+                <input type="text" name="title" placeholder="Title">
+                <input type="hidden" name="homeQuquk" value="<?php echo $homeQuquk; ?>" />
+                <input type="hidden" name="ququkPluginDir" value="<?php echo $ququkPlugin; ?>" />
+                <input type="hidden" name="type" value="ququkCategory" />
             </div>
 
         </div>
-            <a href="#cat" class="button secondary">Add Category</a>
+            <a class="button secondary">Add Category</a>
     </fieldset>
 </form>
-
+<div class="success"></div>
 <!-- Footer -->
 
 

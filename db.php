@@ -1,6 +1,8 @@
 <?php
-class ququkDb{
-   public $wpdb;
+class ququkDb {
+
+    public $wpdb;
+
     public function __construct(){
         global $wpdb;
         $this->wpdb = $wpdb;
@@ -14,6 +16,7 @@ class ququkDb{
         try{
             $result = array("INSERT INTO ququkCategory (Slug, title) VALUES (%s, %s)",array($slug,$title));
             $wpdb->query($wpdb->prepare($result[0],$result[1]));
+            return true;
         }catch (Exception $e){
             echo $e->getMessage();
         }
@@ -25,8 +28,9 @@ class ququkDb{
         try{
             $result = array("INSERT INTO ququkContent (Body, CatId) VALUES (%s, %d)",array($body,$id));
             $wpdb->query($wpdb->prepare($result[0],$result[1]));
-        }catch (Exception $e){
+        }catch (PDOException $e){
             echo $e->getMessage();
+            echo $e->errorInfo();
         }
     }
 
