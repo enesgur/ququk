@@ -34,10 +34,25 @@ class ququkDb {
         }
     }
 
-    public static function allCat(){
+    public static function allQuq($start=null,$limit=null,$table){
         global $wpdb;
-        $result = $wpdb->get_results('SELECT Id, Slug FROM ququkCategory',OBJECT_K);
+        if(is_null($start) || is_null($limit))
+            $result = $wpdb->get_results("SELECT * FROM {$table}",OBJECT_K);
+        else
+            if(!is_null($start) && !is_null($limit))
+                $pagenation =  " LIMIT {$start},{$limit}";
+            $result = $wpdb->get_results("SELECT * FROM {$table}{$pagenation}",OBJECT_K);
         return $result;
+    }
+
+    public static function ququCount($table){
+        global $wpdb;
+        $result = $wpdb->get_results("SELECT COUNT(*) as Count FROM {$table}",OBJECT_K);
+        foreach($result as $row){
+            $count = $row->Count;
+            break;
+        }
+        return $count;
     }
    // public function selectQuq($start,$limit,)
 }

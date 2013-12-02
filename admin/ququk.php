@@ -5,7 +5,6 @@ foreach ($cat as $key) {
     $row .= "<option value='$key->Id' >".$key->Slug."</option>\n";
 }
 ?>
-
     <!-- Contact Details -->
 <div class="success"></div>
 <form id="formCat" action="" method="post">

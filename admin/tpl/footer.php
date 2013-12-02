@@ -36,11 +36,16 @@ jQuery.noConflict();
             });
         });
         jQuery(".addQuq").click(function(){
-            serialize = jQuery("#formQuq").serialize();
+            selectVal = jQuery("option:selected").val();
+            selectName= jQuery("select").attr("name");
+            select = selectName+"="+selectVal+"&";
+            input  = jQuery("#formQuq input").serialize();
+            textarea = jQuery("#formQuq textarea").serialize()+"&";
+            dataQuq = select+textarea+input;
             jQuery.ajax({
                 type: "post",
                 url: "<?php echo $ququkAdmin; ?>ajax.php",
-                data:serialize,
+                data:dataQuq,
                 success: function(data){
                     jQuery(".success").html(data);
                 }

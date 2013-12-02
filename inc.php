@@ -79,19 +79,28 @@ class ququk {
     }
 
     public function adminPageSubmenuFunction(){
+        //Add Category Page Function
         function ququkAdminSubMenu() {
-            add_submenu_page( 'ququk/admin/ququk.php', 'Category Settings', 'Category Settings', 'manage_options', 'my-custom-submenu-page', 'ququkAdminSubmenuCategory' );
-
+            add_submenu_page( 'ququk/admin/ququk.php', 'Category Settings', 'Category Settings', 'manage_options', 'ququk-cat', 'ququkAdminSubmenuCategory' );
         }
     }
     /*
      * İnclude Submenu Page
      */
     public function adminSubmenuPage(){
+        global $ququkPlugin;
+        global $ququkThemes;
+        global $homeQuquk;
+        global $ququkAdmin;
+        global $ququkUrl;
+        //Add Hook Category Page Function.
         function ququkAdminSubmenuCategory(){
-            echo '<div class="wrap"><div id="icon-tools" class="icon32"></div>';
-            echo '<h2>My Custom Submenu Page</h2>';
-            echo '</div>';
+            global $ququkPlugin;
+            global $ququkThemes;
+            global $homeQuquk;
+            global $ququkAdmin;
+            global $ququkUrl;
+            include($ququkPlugin."/admin/category.php");
         }
     }
 

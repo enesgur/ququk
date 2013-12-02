@@ -15,6 +15,7 @@ $homeQuquk      = ABSPATH;
 $ququkPlugin    = ABSPATH."wp-content/plugins/ququk/";
 $ququkThemes    =  plugins_url()."/ququk/admin/tpl/";
 $ququkAdmin     = plugins_url()."/ququk/admin/";
+$ququkUrl       = plugins_url()."/ququk";
 //İnclude Class System
 include("inc.php");
 include("db.php");

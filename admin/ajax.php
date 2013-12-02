@@ -1,6 +1,5 @@
 <?php 
 if($_POST){
-	print_r($_POST);
 	/*
 	 *İnclude wp-blog-header.php
 	*/
@@ -42,6 +41,12 @@ if($_POST){
 			if($ququkDb->insertQuq($body,$cat)){
 				echo '<div data-alert class="alert-box success">';
 				echo 'success add <b>Quq</b>';
+				echo '<a href="#" class="close">&times;</a>';
+				echo '</div>';
+			}
+			else{
+				echo '<div data-alert class="alert-box round">';
+				echo 'failed add <b>Quq</b>';
 				echo '<a href="#" class="close">&times;</a>';
 				echo '</div>';
 			}
