@@ -100,6 +100,7 @@ class ququk {
             global $homeQuquk;
             global $ququkAdmin;
             global $ququkUrl;
+            global $ququkCatUrl;
             include($ququkPlugin."/admin/category.php");
         }
     }
