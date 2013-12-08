@@ -66,7 +66,6 @@ $pagination = $cats['pagination'];
                 alert(data);
             }
         });
-        //console.log(data);
     });
 </script>
 <?php include($ququkPlugin."admin/tpl/footer.php"); //Include Footer File (All Js include) ?>
