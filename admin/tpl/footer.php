@@ -52,6 +52,23 @@ jQuery.noConflict();
             });
         });
     });
+    jQuery(document).on("DOMNodeInserted", function(){
+        jQuery(".editCat").click(function(){
+            jQuery.ajax({
+               type: "post",
+               url: "<?php echo $ququkAdmin; ?>ajax.php",
+               data:jQuery("#formCat").serialize(),
+               success: function(data){
+                   jQuery(".success").html(data);
+               }
+           });
+            var id      = jQuery(".id").attr("value");
+            var slug    = jQuery("input[name='slug']").val();
+            var title   = jQuery("input[name='title']").val();
+            jQuery("#slug-id-"+id).html(slug);
+            jQuery("#title-id-"+id).html(title);
+        });
+    });
 </script>
 <script src="<?php echo $ququkThemes; ?>js/foundation.min.js"></script>
 <!--

@@ -21,7 +21,29 @@ class ququkDb {
             echo $e->getMessage();
         }
     }
-
+    /*
+     * Return QuQuk and Category
+     */
+    public static function getQuq($id,$table){
+        global $wpdb;
+        $result = $wpdb->get_results("SELECT * FROM {$table} WHERE Id = {$id}",OBJECT_K);
+        return $result;
+    }
+    public static function setCat($slug,$title,$id){
+        global $wpdb;
+        $slug = htmlspecialchars($slug);
+        $title= htmlspecialchars($title);
+        try{
+            $result = array("UPDATE ququkCategory SET Slug= %s, title= %s WHERE id = %s",array($slug,$title,$id));
+            $wpdb->query($wpdb->prepare($result[0],$result[1]));
+            return true;
+        }catch (Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    /*
+     * Add Database QuQuk
+     */
     public function insertQuq($body,$id){
         $wpdb = $this->wpdb;
         //$body = htmlspecialchars($body);
@@ -33,7 +55,10 @@ class ququkDb {
             echo $e->errorInfo();
         }
     }
-
+    /*
+     * Girilen Tablodaki tüm değerleri limite göre listeler
+     * İster QuQuk İster Cat
+     */
     public static function allQuq($start=null,$limit=null,$table){
         global $wpdb;
         if(is_null($start) || is_null($limit))

@@ -56,7 +56,53 @@ if($_POST){
 			echo '<a href="#" class="close">&times;</a>';
 			echo '</div>';
 		}
-	}
+	}elseif($_POST['type'] == "catGet"){
+        $id     = $_POST['id'];
+        $return = ququkDb::getQuq($id,"ququkCategory");
+
+        $form = '<form id="formCat" action="" method="post">';
+        $form .= '<fieldset>';
+        $form .= '<legend name="cat"><a name="cat"/>Edit QuQuk Category</a></legend>';
+        $form .= '<div class="row">';
+        $form .= '<div class="large-5 columns">';
+        $form .= '<label>Slug</label>';
+        $form .= '<input type="text" name="slug" value="Slug">';
+        $form .= '</div>';
+        $form .= '<div class="large-5 pull-2 columns">';
+        $form .= '<label>Title</label>';
+        $form .= '<input type="text" name="title" value="Title">';
+        $form .= "<input type='hidden' class='id' name='id' value='$id' />";
+        $form .= '<input type="hidden" name="homeQuquk" value="'.$homeQuquk.'" />';
+        $form .= '<input type="hidden" name="ququkPluginDir" value="'.$ququkPlugin.'" />';
+        $form .= '<input type="hidden" name="type" value="ququkCategoryEdit" />';
+        $form .= '</div></div>';
+        $form .= '<a class="button editCat secondary" onclick="confirm(\'Are you sure?\')">Edit Category</a>';
+        $form .= '</fieldset>';
+        $form .= '</form>';
+
+        foreach($return as $row){
+            $form = str_replace(array('value="Title"','value="Slug"'),array("value='$row->title'","value='$row->Slug'"),$form);
+            echo $form;
+        }
+    }elseif($_POST['type'] == "ququkCategoryEdit"){
+        $slug  = $_POST['slug'];
+        $title = $_POST['title'];
+        $id    = $_POST['id'];
+        if($slug == "" || $title == ""){
+            echo '<div data-alert class="alert-box alert">';
+            echo 'failed edit <b>cat</b>';
+            echo '<a href="#" class="close">&times;</a>';
+            echo '</div>';
+            die();
+        }
+        if(ququkDb::setCat($slug,$title,$id)){
+            echo '<div data-alert class="alert-box success">';
+            echo 'success Edit <b>ququkCategory</b>';
+            echo '<a href="#" class="close">&times;</a>';
+            echo '</div>';
+        }
+
+    }
 }
 
 ?>

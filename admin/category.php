@@ -6,6 +6,7 @@ $allCat     = $cats['table'];
 $pagination = $cats['pagination'];
 ?>
 <br />
+<div class="success"></div>
 <table>
     <thead>
         <tr>
@@ -19,15 +20,31 @@ $pagination = $cats['pagination'];
     <tbody>
         <?php foreach($allCat as $row):  ?>
         <tr>
-        <td class="text-center"><?php echo $row->Id; ?></td>
-        <td class="text-center"><?php echo $row->Slug; ?></td>
-        <td class="text-center"><?php echo $row->title; ?></td>
+        <td class="text-center" id="id-<?php echo $row->Id; ?>"><?php echo $row->Id; ?></td>
+        <td class="text-center" id="slug-id-<?php echo $row->Id; ?>"><?php echo $row->Slug; ?></td>
+        <td class="text-center" id="title-id-<?php echo $row->Id; ?>"><?php echo $row->title; ?></td>
         <td class="text-center"><label for="checkbox<?php echo $row->Id; ?>"><input type="checkbox" id="<?php echo $row->Id; ?>" name="catDelete[]" value="<?php echo $row->Id; ?>" style="display: inline-block;"> delete category?</label></td>
-        <td class="text-center"><a href="#edited" class="button secondary radius">Edited</a></td>
+        <td class="text-center"><a id="edited" class="button secondary radius" edited="<?php echo $row->Id; ?>">Edited</a></td>
         </tr>
         <?php endforeach ?>
     </tbody>
 </table>
+<qq></qq>
+<script type="text/javascript">
+    jQuery(document).ready(function($){
+        $("td a").click(function(){
+            var id = $(this).parent().find("a").attr("edited");
+            $.ajax({
+               type: 'POST',
+                data: { 'id' : id, 'type' : "catGet", 'homeQuquk' : '<?php echo $homeQuquk; ?>', 'ququkPluginDir' : '<?php echo $ququkPlugin; ?>' },
+                url: "<?php echo $ququkAdmin; ?>ajax.php",
+                success:function(data){
+                 $("qq").html(data);
+               }
+            });
+        });
+    });
+</script>
 <input type="button" class="goDelete button round right" value="delete" onclick="confirm('Are you sure you want to delete categories?')" />
 <div class="pagination-centered">
     <ul class="pagination">
