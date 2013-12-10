@@ -74,6 +74,10 @@ class ququk {
 
     public function  adminPageFunction(){
         function ququkAdminPage(){
+            /*
+             * Add Admin Page Menu
+             * Left bar menu
+             */
             add_menu_page( 'QuQuk Admin Page', 'QuQuk Config', 'manage_options', 'ququk/admin/ququk.php', '','', 6 );
         }
     }
@@ -82,17 +86,14 @@ class ququk {
         //Add Category Page Function
         function ququkAdminSubMenu() {
             add_submenu_page( 'ququk/admin/ququk.php', 'Category Settings', 'Category Settings', 'manage_options', 'ququk-cat', 'ququkAdminSubmenuCategory' );
+            add_submenu_page( 'ququk/admin/ququk.php', 'Content Settings', 'Content Settings', 'manage_options', 'ququk-body', 'ququkAdminSubmenuContent' );
+
         }
     }
     /*
      * İnclude Submenu Page
      */
     public function adminSubmenuPage(){
-        global $ququkPlugin;
-        global $ququkThemes;
-        global $homeQuquk;
-        global $ququkAdmin;
-        global $ququkUrl;
         //Add Hook Category Page Function.
         function ququkAdminSubmenuCategory(){
             global $ququkPlugin;
@@ -102,6 +103,16 @@ class ququk {
             global $ququkUrl;
             global $ququkCatUrl;
             include($ququkPlugin."/admin/category.php");
+        }
+        //Add Hook Content Page Function.
+        function ququkAdminSubmenuContent(){
+            global $ququkPlugin;
+            global $ququkThemes;
+            global $homeQuquk;
+            global $ququkAdmin;
+            global $ququkUrl;
+            global $ququkCatUrl;
+            include($ququkPlugin."/admin/content.php");
         }
     }
 

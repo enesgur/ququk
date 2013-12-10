@@ -28,3 +28,6 @@ function pagination($page=null,$table,$url){
     $results['pagination'] = $pagination;
     return $results;
 }
+function catUrl(){
+    
+}

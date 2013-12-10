@@ -102,6 +102,27 @@ if($_POST){
             echo '</div>';
         }
 
+    }elseif($_POST['type'] == "catDelete"){
+        $cats = $_POST['catDelete'];
+        if(count($cats) != 0){
+            if(ququkDb::deleteQuq($cats,"ququkCategory")){
+                echo '<div data-alert class="alert-box success">';
+                echo 'Success Deleted Categories and Will be redirected in 3 seconds';
+                echo '<a href="#" class="close">&times;</a>';
+                echo '</div>';
+            }else{
+                echo '<div data-alert class="alert-box alert">';
+                echo 'failed delete <b>cats</b> and Will be redirected in 3 seconds';
+                echo '<a href="#" class="close">&times;</a>';
+                echo '</div>';
+            }
+        }else{
+            echo '<div data-alert class="alert-box alert">';
+            echo 'failed delete <b>cats</b> and Will be redirected in 3 seconds';
+            echo '<a href="#" class="close">&times;</a>';
+            echo '</div>';
+        }
+
     }
 }
 

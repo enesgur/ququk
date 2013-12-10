@@ -1,5 +1,4 @@
 <?php include($ququkPlugin."admin/tpl/header.php"); //Imclude Header File (Style and Javascript Include) ?>
-<?php include($ququkPlugin."functions.php"); //Imclude Functions File ?>
 <?php
 $cats       = pagination($_GET['pages'],"ququkCategory",$ququkCatUrl); //Return Pagination and Table Results
 $allCat     = $cats['table'];
@@ -7,6 +6,10 @@ $pagination = $cats['pagination'];
 ?>
 <br />
 <div class="success"></div>
+<form id="formCheck">
+    <input type="hidden" name="type" value="catDelete" />
+    <input type="hidden" name="homeQuquk" value="<?php echo $homeQuquk; ?>" />
+    <input type="hidden" name="ququkPluginDir" value="<?php echo $ququkPlugin; ?>"/>
 <table>
     <thead>
         <tr>
@@ -29,6 +32,7 @@ $pagination = $cats['pagination'];
         <?php endforeach ?>
     </tbody>
 </table>
+</form>
 <qq></qq>
 <script type="text/javascript">
     jQuery(document).ready(function($){
@@ -63,7 +67,10 @@ $pagination = $cats['pagination'];
             data: jQuery("#formCheck").serialize(),
             url : "<?php echo $ququkAdmin; ?>ajax.php",
             success: function(data){
-                alert(data);
+                jQuery(".success").html(data);
+                if(window.top==window) {
+                    window.setTimeout('location.reload()', 3000); //reloads after 3 seconds
+                }
             }
         });
     });

@@ -29,6 +29,32 @@ class ququkDb {
         $result = $wpdb->get_results("SELECT * FROM {$table} WHERE Id = {$id}",OBJECT_K);
         return $result;
     }
+    /*
+     * Delete QuQuk and Category
+     */
+    public static function deleteQuq($id,$table){
+        global $wpdb;
+        $count = count($id);
+        $i=0;
+        foreach($id as $row){
+            try{
+                $result = array("DELETE FROM {$table} WHERE Id = %s",array($row));
+                $wpdb->query($wpdb->prepare($result[0],$result[1]));
+                $i++;
+            }catch (Exception $e){
+                echo $e->getMessage();
+                die();
+            }
+        }
+        if($i == $count)
+            return true;
+        else
+            return false;
+
+    }
+    /*
+     * Update QuQuk Category
+     */
     public static function setCat($slug,$title,$id){
         global $wpdb;
         $slug = htmlspecialchars($slug);
