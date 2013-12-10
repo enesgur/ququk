@@ -28,6 +28,14 @@ function pagination($page=null,$table,$url){
     $results['pagination'] = $pagination;
     return $results;
 }
+/*
+ * Submenü olarak eklenen sayfanın adresi
+ * Bu adres Pagination kısmında lazım olacaktır.
+ */
 function catUrl(){
-
+    $url = $_SERVER[REQUEST_URI];
+    $url = explode("ququk-",$url);
+    $url = "admin.php?page=ququk-".$url[1];
+    $url = str_replace(array("_","%","&"),"",$url);
+    return $url;
 }
