@@ -1,6 +1,6 @@
 <?php include($ququkPlugin."admin/tpl/header.php"); //Imclude Header File (Style and Javascript Include) ?>
 <?php
-$cat = $ququkDb::allQuq(null,null,"ququkCategory");
+$cat = ququkDb::allQuq(null,null,"ququkCategory");
 foreach ($cat as $key) {
     $row .= "<option value='$key->Id' >".$key->Slug."</option>\n";
 }

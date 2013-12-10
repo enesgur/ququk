@@ -76,6 +76,7 @@ class ququkDb {
         try{
             $result = array("INSERT INTO ququkContent (Body, CatId) VALUES (%s, %s)",array($body,$id));
             $wpdb->query($wpdb->prepare($result[0],$result[1]));
+            return true;
         }catch (PDOException $e){
             echo $e->getMessage();
             echo $e->errorInfo();

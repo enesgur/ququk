@@ -33,9 +33,12 @@ function pagination($page=null,$table,$url){
  * Bu adres Pagination kısmında lazım olacaktır.
  */
 function catUrl(){
+    $admin = "admin.php?page=";
     $url = $_SERVER[REQUEST_URI];
     $url = explode("ququk-",$url);
-    $url = "admin.php?page=ququk-".$url[1];
-    $url = str_replace(array("_","%","&"),"",$url);
+    $url = "ququk-".$url[1];
+    if(strstr($url,"&"))
+        $url = strstr($url,"&",true);
+    $url = $admin.$url;
     return $url;
 }

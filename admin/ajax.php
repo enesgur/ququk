@@ -45,12 +45,12 @@ if($_POST){
 				echo '</div>';
 			}
 			else{
-				echo '<div data-alert class="alert-box round">';
-				echo 'failed add <b>Quq</b>';
-				echo '<a href="#" class="close">&times;</a>';
-				echo '</div>';
-			}
-		}else{
+                echo '<div data-alert class="alert-box round">';
+                echo 'failed add <b>Quq</b>';
+                echo '<a href="#" class="close">&times;</a>';
+                echo '</div>';
+            }
+        }else{
 			echo '<div data-alert class="alert-box alert">';
 			echo 'failed add <b>Quq</b>';
 			echo '<a href="#" class="close">&times;</a>';
