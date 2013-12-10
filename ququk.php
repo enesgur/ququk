@@ -22,7 +22,6 @@ $ququkCatUrl    = admin_url('admin.php?page=ququk-cat');
 include("inc.php");
 include("db.php");
 include($ququkPlugin."functions.php"); //Imclude Functions File
-test();
 
 $ququkDb    = new ququkDb();
 $ququk      = new ququk();
