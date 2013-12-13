@@ -123,6 +123,48 @@ if($_POST){
             echo '</div>';
         }
 
+    }elseif($_POST['type'] == "quqGet"){
+        $id     = $_POST['id'];
+        $return = ququkDb::getQuq($id,"ququkContent");
+        $cat = ququkDb::allQuq(null,null,"ququkCategory");
+        foreach($return as $row){
+            $quq['id'] = $row->Id;
+            $quq['body'] = $row->Body;
+            $quq['catid'] = $row->CatId;
+        }
+        foreach($cat as $row){
+            if($row->Id == $quq['catid'])
+                $cats .= "<option value='$row->Id' selected>$row->Slug</option> \n";
+            else
+                $cats .= "<option value='$row->Id'>$row->Slug</option> \n";
+
+        }
+
+        $form = '<form id="formCat" action="" method="post">';
+        $form .= '<fieldset>';
+        $form .= '<legend name="cat"><a name="cat"/>Edit QuQuk Content</a></legend>';
+        $form .= '<div class="row">';
+        $form .= '<div class="large-5 columns">';
+        $form .= '<label>Body</label>';
+        $form .= '<textarea name="body">';
+        $form .= $quq['body'];
+        $form .= '</textarea>';
+        $form .= '</div>';
+        $form .= '<div class="large-5 pull-2 columns">';
+        $form .= '<label>Category</label>';
+        $form .= '<select name="cat" class="medium">';
+        $form .= $cats;
+        $form .= '</select>';
+        $form .= "<input type='hidden' class='id' name='id' value='$quq[id]' />";
+        $form .= '<input type="hidden" name="homeQuquk" value="'.$homeQuquk.'" />';
+        $form .= '<input type="hidden" name="ququkPluginDir" value="'.$ququkPlugin.'" />';
+        $form .= '<input type="hidden" name="type" value="ququkContentEdit" />';
+        $form .= '</div></div>';
+        $form .= '<a class="button editCat secondary" onclick="confirm(\'Are you sure?\')">Edit QuQuk</a>';
+        $form .= '</fieldset>';
+        $form .= '</form>';
+
+        echo $form;
     }
 }
 
