@@ -27,6 +27,8 @@ $ququkCatUrl    = admin_url(catUrl());
 $ququkDb    = new ququkDb();
 $ququk      = new ququk();
 
+//Widget
+$ququk->widget();
 if(is_admin()){
     $ququk->adminPageAction();
     $ququk->adminPageFunction();

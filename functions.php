@@ -2,7 +2,7 @@
 function pagination($page=null,$table,$url){
     global $ququkDb;
     $ququkCatUrl = $url;
-    $limit = 4;
+    $limit = 10;
     $count = ququkDb::ququCount($table);
     $totalPage = ceil($count / $limit);
     if(!is_numeric($page) || is_null($page) || $page > $totalPage || $page < 1){

@@ -115,5 +115,11 @@ class ququk {
             include($ququkPlugin."/admin/content.php");
         }
     }
+     public function widget(){
+        include("widget.php");
+        add_action( 'widgets_init', function(){
+            register_widget( 'Quq_Widget' );
+        });
+    }
 
 } 

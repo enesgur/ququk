@@ -62,6 +62,7 @@ $pagination = $cats['pagination'];
 <script type="text/javascript">
     //Delete Ajax Category.
     jQuery(".goDelete").click(function(){
+        jQuery("#formCat").remove();
         jQuery.ajax({
             type: 'POST',
             data: jQuery("#formCheck").serialize(),
@@ -69,7 +70,7 @@ $pagination = $cats['pagination'];
             success: function(data){
                 jQuery(".success").html(data);
                 if(window.top==window) {
-                    window.setTimeout('location.reload()', 3000); //reloads after 3 seconds
+                    window.setTimeout('location.reload()', 2500); //reloads after 3 seconds
                 }
             }
         });

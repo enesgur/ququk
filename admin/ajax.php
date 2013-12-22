@@ -1,4 +1,4 @@
-<?php 
+<?php
 if($_POST){
 	/*
 	 *İnclude wp-blog-header.php
@@ -9,7 +9,7 @@ if($_POST){
 		if(file_exists($wpheader)){
 			include($wpheader);
 		}
-	}else
+    }else
 		die();
 
 	if ($_POST['type'] === "ququkCategory") {
@@ -129,18 +129,17 @@ if($_POST){
         $cat = ququkDb::allQuq(null,null,"ququkCategory");
         foreach($return as $row){
             $quq['id'] = $row->Id;
-            $quq['body'] = $row->Body;
+            $quq['body'] = stripslashes($row->Body);
             $quq['catid'] = $row->CatId;
         }
         foreach($cat as $row){
             if($row->Id == $quq['catid'])
-                $cats .= "<option value='$row->Id' selected>$row->Slug</option> \n";
+                $cats .= "<option value='$row->Id' values='$row->Id' selected='selected'>$row->Slug-$row->Id</option> \n";
             else
-                $cats .= "<option value='$row->Id'>$row->Slug</option> \n";
+                $cats .= "<option value='$row->Id' values='$row->Id'>$row->Slug-$row->Id</option> \n";
 
         }
-
-        $form = '<form id="formCat" action="" method="post">';
+        $form = '<!--<form id="formQuq" action="" method="post">-->';
         $form .= '<fieldset>';
         $form .= '<legend name="cat"><a name="cat"/>Edit QuQuk Content</a></legend>';
         $form .= '<div class="row">';
@@ -152,7 +151,7 @@ if($_POST){
         $form .= '</div>';
         $form .= '<div class="large-5 pull-2 columns">';
         $form .= '<label>Category</label>';
-        $form .= '<select name="cat" class="medium">';
+        $form .= '<select name="cat" id="selectCat" class="medium">';
         $form .= $cats;
         $form .= '</select>';
         $form .= "<input type='hidden' class='id' name='id' value='$quq[id]' />";
@@ -160,11 +159,50 @@ if($_POST){
         $form .= '<input type="hidden" name="ququkPluginDir" value="'.$ququkPlugin.'" />';
         $form .= '<input type="hidden" name="type" value="ququkContentEdit" />';
         $form .= '</div></div>';
-        $form .= '<a class="button editCat secondary" onclick="confirm(\'Are you sure?\')">Edit QuQuk</a>';
+        $form .= '<a class="button editQuq secondary" onclick="confirm(\'Are you sure?\')">Edit QuQuk</a>';
         $form .= '</fieldset>';
-        $form .= '</form>';
+        $form .= '<!--</form>-->';
 
         echo $form;
+    }elseif($_POST['type'] == "ququkContentEdit"){
+        $parseCatId = end(explode("-",$_POST['cat'])); //Get Cat Id..
+        $cat = ququkDb::getQuq($parseCatId,"ququkCategory");
+        if(is_array($cat))
+            $cat = current(array_keys($cat)); //Array is the first index value
+        else
+            die("Error Cat ID");
+        if(ququkDb::setQuq($_POST['body'],$cat,$_POST['ququkId'])){
+            echo '<div data-alert class="alert-box success">';
+            echo 'Success edited';
+            echo '<a href="#" class="close">&times;</a>';
+            echo '</div>';
+        }else{
+            echo '<div data-alert class="alert-box alert">';
+            echo 'editing fails';
+            echo '<a href="#" class="close">&times;</a>';
+            echo '</div>';
+        }
+    }elseif($_POST['type'] == "quqDelete"){
+        $quq = $_POST['quqDelete'];
+        if(count($quq) != 0){
+            if(ququkDb::deleteQuq($quq,"ququkContent")){
+                echo '<div data-alert class="alert-box success">';
+                echo 'Success Deleted Quq and Will be redirected in 3 seconds';
+                echo '<a href="#" class="close">&times;</a>';
+                echo '</div>';
+            }else{
+                echo '<div data-alert class="alert-box alert">';
+                echo 'failed delete <b>Quq</b> and Will be redirected in 3 seconds';
+                echo '<a href="#" class="close">&times;</a>';
+                echo '</div>';
+            }
+        }else{
+            echo '<div data-alert class="alert-box alert">';
+            echo 'failed delete <b>Quq</b> and Will be redirected in 3 seconds';
+            echo '<a href="#" class="close">&times;</a>';
+            echo '</div>';
+        }
+
     }
 }
 

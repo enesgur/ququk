@@ -9,8 +9,3 @@
         Please use <strong>Chrome</strong> and <strong>Firefox</strong> as your Internet browser.<br/>
         We continue our work for <strong>Opera</strong> users.
     </div>
-    <nav class="breadcrumbs">
-        <a href="">Home</a>
-        <a href="#">Categories</a>
-
-    </nav>

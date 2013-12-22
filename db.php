@@ -7,7 +7,23 @@ class ququkDb {
         global $wpdb;
         $this->wpdb = $wpdb;
     }
-//        $ququkInsert[] = array("INSERT INTO ququkCategory (Id, Slug, title) VALUES (%d, %s, %s)",array(1,'default','The default category'));
+
+    public static function quq($count=1,$slug){
+        global $wpdb;
+        if(!is_numeric($slug) || !is_numeric($count)) {
+            return false;
+        }else{
+            $rows = self::countQuq($slug);
+            if($rows == 0 || $count == 0)
+                return false;
+            else{
+                $results = $wpdb->get_results("SELECT Body FROM ququkContent WHERE CatId = {$slug} ORDER BY rand() LIMIT {$count}",OBJECT_K);
+                return $results;
+            }
+        }
+
+
+    }
 
     public function insertCat($slug,$title){
         $wpdb = $this->wpdb;
@@ -68,11 +84,23 @@ class ququkDb {
         }
     }
     /*
+     * Update QuQuk Category
+     */
+    public static function setQuq($body,$cat,$id){
+        global $wpdb;
+        try{
+            $result = array("UPDATE ququkContent SET Body= %s, CatId= %s WHERE id = %s",array($body,$cat,$id));
+            $wpdb->query($wpdb->prepare($result[0],$result[1]));
+            return true;
+        }catch (Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    /*
      * Add Database QuQuk
      */
     public function insertQuq($body,$id){
         $wpdb = $this->wpdb;
-        //$body = htmlspecialchars($body);
         try{
             $result = array("INSERT INTO ququkContent (Body, CatId) VALUES (%s, %s)",array($body,$id));
             $wpdb->query($wpdb->prepare($result[0],$result[1]));
@@ -106,5 +134,14 @@ class ququkDb {
         }
         return $count;
     }
-   // public function selectQuq($start,$limit,)
+
+    public static function countQuq($where){
+        global $wpdb;
+        $result = $wpdb->get_results("SELECT COUNT(*) as Count FROM ququkContent WHERE CatId = {$where} ",OBJECT_K);
+        foreach($result as $row){
+            $count = $row->Count;
+            break;
+        }
+        return $count;
+    }
 }
