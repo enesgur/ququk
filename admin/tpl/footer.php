@@ -4,14 +4,12 @@
         <hr>
         <div class="row">
             <div class="large-6 columns">
-                <p>© Copyright no one at all. Go to town.</p>
+                <p>Thanks Ethem GÜR.</p>
             </div>
             <div class="large-6 columns">
                 <ul class="inline-list right">
-                    <li><a href="http://enesgur.com.tr">Enes Gür</a></li>
+                    <li><a href="http://enesgur.com.tr">Developer By Enes Gür</a></li>
                     <li><a href="http://wordpress.org">Wordpress</a></li>
-                    <li><a href="#">Link 3</a></li>
-                    <li><a href="#">Link 4</a></li>
                 </ul>
             </div>
         </div>
